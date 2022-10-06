@@ -1,0 +1,4 @@
+.horizontal-form-label
+  = f.label attribute, t("kirby.#{plugin.namespace}.settings.#{attribute}")
+.horizontal-form-content
+  = render 'kirby/admin/shared/rich_text_field', f: f, field: attribute

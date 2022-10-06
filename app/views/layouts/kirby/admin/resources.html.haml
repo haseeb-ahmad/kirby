@@ -1,0 +1,10 @@
+- content_for :application do
+  %header#header
+    #header_actions
+      = yield(:header_actions)
+
+    = render partial: 'kirby/admin/shared/breadcrumbs'
+
+  = yield
+
+= render template: "layouts/kirby/admin/admin"

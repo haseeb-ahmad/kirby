@@ -1,0 +1,35 @@
+!!!
+%html{lang: I18n.locale}
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'initial-scale=1.0'}
+    = csrf_meta_tags
+    %meta{name: 'turbolinks-cache-control', content: 'no-preview'}
+
+    %title Kirby
+
+    / Stylesheet
+    = stylesheet_link_tag 'kirby/admin/application', data: {turbolinks_track: true}
+
+    /[if lt IE 9]
+      = javascript_include_tag '//html5shiv.googlecode.com/svn/trunk/html5.js', data: {turbolinks_track: true}
+
+    / JavaScript
+    = javascript_include_tag 'kirby/admin/application', data: {turbolinks_track: true}
+    = yield(:plugin_stylesheets)
+
+    / Plugins
+    - Kirby::Plugin.all.each do |plugin|
+      - if current_theme.plugins.include? plugin.name
+        - if lookup_context.exists? "kirby/admin/hooks/#{ plugin.namespace }/_head"
+          = render "kirby/admin/hooks/#{ plugin.namespace }/head"
+
+  %body
+    = render 'kirby/admin/shared/primary_navigation'
+
+    %section#main
+      = yield(:permanent_notice)
+
+      = render 'kirby/admin/shared/notifications'
+
+      = content_for?(:application) ? yield(:application) : yield

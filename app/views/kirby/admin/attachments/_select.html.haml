@@ -1,0 +1,17 @@
+.modal.modal-large
+  %header
+    = link_to "", "#", class: 'close_modal', data: {dismiss: 'modal', icon: 'm'}
+    %h3= t('kirby.attachments.insert')
+
+  %section
+    = form_tag kirby.insert_admin_attachments_path(params[:page_part_id]), remote: true, class: 'document-select' do
+      = hidden_field_tag :hidden_field_id, @hidden_field_id
+
+      %ul
+        - @attachments.each do |attachment|
+          %li.item
+            = radio_button_tag :attachment_id, attachment.id, attachment.id == @selected_attachment_id
+            = label_tag "attachment_id_#{attachment.id}", attachment.name
+      %footer
+        = link_to t('kirby.cancel'), "#", data: {dismiss: 'modal'}
+        = button_tag t('kirby.attachments.insert'), type: 'submit', class: 'primary', data: {icon: 't '}

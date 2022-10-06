@@ -1,0 +1,22 @@
+= form_for [:admin, @navigation] do |f|
+  = hidden_field_tag 'navigation[page_ids][]', nil
+
+  %header#header
+    #header_actions
+      = button_tag t('kirby.save'), class: 'button button-primary'
+    .breadcrumbs= render_breadcrumbs separator: '<div class="divider"></div>'
+
+
+  .well
+    .table-container
+      %table.table.table-clickable
+        %tbody= render partial: 'page', collection: Kirby::Page.sorted.roots.regular_pages
+
+  .well
+    .horizontal-form
+      .horizontal-form-group
+        .horizontal-form-label
+          = Kirby::Navigation.human_attribute_name :auto_add_pages
+          %small= Kirby::Navigation.human_attribute_name :auto_add_pages_description
+        .horizontal-form-content
+          = f.check_box :auto_add_pages, data: {switch: true}

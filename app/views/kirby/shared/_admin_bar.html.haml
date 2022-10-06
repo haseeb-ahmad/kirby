@@ -1,0 +1,4 @@
+- if current_kirby_user.present?
+  #admin_bar
+    = link_to t('kirby.edit_website'), kirby.admin_root_url, data: {icon: 'q', :"no-turbolink" => true}, class: 'button button-hollow button-round button-small'
+    = link_to t('kirby.logout'), kirby.admin_logout_path, data: {icon: 'h'}, class: 'button button-hollow button-round button-small'

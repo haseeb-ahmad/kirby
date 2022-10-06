@@ -1,0 +1,13 @@
+= form_tag kirby.admin_password_resets_path, method: :post, id: "login_wrapper" do
+  = image_tag 'kirby/kirby-large.png'
+  - if flash[:alert].present?
+    .failed-to-login.animated.fadeInDown
+      .icon.icon-cross
+      = flash[:alert]
+
+  .login-fields
+    = text_field_tag :email, params[:email], placeholder: Kirby::User.human_attribute_name(:email), autofocus: true
+
+  = button_tag t('kirby.forgot_password.request'), class: 'button button-primary'
+
+  .login-extra-links= link_to t('kirby.login'), kirby.admin_login_path, class: 'button button-hollow button-block'

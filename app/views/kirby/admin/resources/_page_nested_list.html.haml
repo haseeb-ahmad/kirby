@@ -1,0 +1,7 @@
+%li.dd-item{data: {id: page_nested_list.id}}
+  .dd-item-inner
+    = render partial: 'kirby/admin/pages/page', object: page_nested_list
+
+  - if page_nested_list.children.resource_pages.any?
+    %ol.dd-list
+      = render partial: 'page_nested_list', collection: page_nested_list.children.active.sorted.resource_pages

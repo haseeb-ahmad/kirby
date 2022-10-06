@@ -1,0 +1,28 @@
+= form_for [kirby, :admin, current_account], url: kirby.admin_account_path do |f|
+  %header#header
+    = render partial: 'kirby/admin/shared/breadcrumbs'
+
+    #header_actions
+      %button.button.button-primary{type: 'submit'}
+        = icon('check')
+        = t('kirby.preferences.social_media_save')
+
+  .well
+    .horizontal-form
+      .horizontal-form-group
+        .horizontal-form-label
+          = Kirby::Account.human_attribute_name(:facebook)
+        .horizontal-form-content
+          = f.text_field :facebook, placeholder: Kirby::Account.human_attribute_name(:facebook)
+
+      .horizontal-form-group
+        .horizontal-form-label
+          = Kirby::Account.human_attribute_name(:twitter)
+        .horizontal-form-content
+          = f.text_field :twitter, placeholder: Kirby::Account.human_attribute_name(:twitter)
+
+      .horizontal-form-group
+        .horizontal-form-label
+          = Kirby::Account.human_attribute_name(:google_plus)
+        .horizontal-form-content
+          = f.text_field :google_plus, placeholder: Kirby::Account.human_attribute_name(:google_plus)

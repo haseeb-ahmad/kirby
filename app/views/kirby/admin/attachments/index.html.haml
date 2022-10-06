@@ -1,0 +1,16 @@
+.table-container
+  %table.table
+    %thead
+      %tr
+        %th= Kirby::Attachment.human_attribute_name(:name)
+        %th= Kirby::Attachment.human_attribute_name(:size)
+        %th= Kirby::Attachment.human_attribute_name(:created_at)
+        %th
+      %tr
+        %td{colspan: 4}
+          = form_with model: [:admin, Kirby::Attachment.new], class: 'new_document', style: 'margin-bottom: 0' do |f|
+            = f.submit style: 'display: none'
+            = f.file_field :files, multiple: true, data: {direct_upload_url: main_app.rails_direct_uploads_url, customfileinput: true}
+
+    %tbody.table-prepend-document
+      = render partial: 'kirby/admin/attachments/attachment', collection: @attachments

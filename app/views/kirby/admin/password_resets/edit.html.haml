@@ -1,0 +1,13 @@
+= form_for @user, url: kirby.admin_password_reset_path(params[:id]), html: {id: "login_wrapper"} do |f|
+  = image_tag 'kirby/kirby-large.png', class: 'animated fadeInDown'
+  - if @user.errors.any?
+    .failed-to-login.animated.fadeInDown
+      .icon.icon-cross
+      = @user.errors.full_messages.join('<br />').html_safe
+
+  .login-fields
+    = f.text_field :password, placeholder: Kirby::User.human_attribute_name(:password), autofocus: true, class: "animated fadeInDown"
+
+    = f.text_field :password_confirmation, placeholder: Kirby::User.human_attribute_name(:password_confirmation), class: "animated fadeInDown"
+
+  = f.button t('kirby.forgot_password.save'), class: 'button button-primary animated fadeInDown'

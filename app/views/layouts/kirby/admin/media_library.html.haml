@@ -1,0 +1,17 @@
+- content_for :application do
+  %header#header
+    #header_actions
+      = yield(:header_actions)
+
+    = render partial: 'kirby/admin/shared/breadcrumbs'
+
+    %nav#secondary.tabs
+      %ul
+        %li{class: ('active' if controller_name.in? %w(images media_folders))}
+          = link_to t('kirby.media_library.images'), admin_images_path
+        %li{class: ('active' if controller_name == 'attachments')}
+          = link_to t('kirby.media_library.attachments'), admin_attachments_path
+
+  = yield
+
+= render template: "layouts/kirby/admin/admin"

@@ -1,0 +1,16 @@
+#page_content.tab-content.active.well
+  .horizontal-form
+    .horizontal-form-group
+      .horizontal-form-label
+        = Kirby::Page.human_attribute_name :title
+      .horizontal-form-content
+        = f.text_field :title, placeholder: Kirby::Page.human_attribute_name(:title_placeholder)
+
+    = f.fields_for :page_parts, @page_parts.sort { |a,b| a.position(current_theme) <=> b.position(current_theme) } do |ff|
+      = ff.hidden_field :id
+      = ff.hidden_field :title
+      = ff.hidden_field :page_partable_type
+      = ff.hidden_field :name
+
+      .horizontal-form-group.page-part{data: {name: ff.object.name}}
+        = render "kirby/admin/partables/#{ partable_type_partial_namespace(ff.object.page_partable_type) }/form", f: ff
