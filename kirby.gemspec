@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'Kirby'
+  s.name        = 'kirby'
   s.version     = '1.2.7'
   s.licenses    = ['MIT']
   s.summary     = "Kirby Gem"
